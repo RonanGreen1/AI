@@ -112,64 +112,30 @@ def depthFirstSearch(problem):
     return []
 
 def breadthFirstSearch(problem):
-    """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
-    """
-    Perform Breadth-First Search (BFS) on the given problem to find a path to the goal.
-
-    Args:
-        problem: A search problem instance that provides methods like:
-            - getStartState(): Returns the start state.
-            - isGoalState(state): Checks if a given state is the goal state.
-            - getSuccessors(state): Returns successors (state, action, cost).
-
-    Returns:
-        A list of actions that form the path to the goal, or an empty list if no path exists.
-    """
-
-    # Initialize a queue (FIFO) to store states to explore.
-    # Each entry in the queue is a tuple: (currentState, actionsSoFar)
     queue = util.Queue()
-    queue.push((problem.getStartState(), []))  # Enqueue the start state with an empty path.
-    print("Start queue:", queue.list)  # Debug: Show initial queue contents.
+    queue.push((problem.getStartState(), []))
+    print("Start  queue:",  queue.list)
+    
+    visited = list()
 
-    # Maintain a list of visited states to prevent revisiting.
-    visited = []
-
-    # Continue exploring until there are no more states in the queue.
-    while not queue.isEmpty():
-        # Dequeue the first element (FIFO).
-        currentState, steps = queue.pop()
-        print("Dequeued:", currentState, "with path:", steps)  # Debug: Show current state and path.
-
-        # Skip this state if it has already been visited.
+    while not  queue.isEmpty():
+        currentState, steps =  queue.pop()
         if currentState in visited:
             continue
-
-        # If the current state is the goal, return the path to it.
         if problem.isGoalState(currentState):
-            print("Goal found! Path:", steps)  # Debug: Goal state reached.
             return steps
 
-        # Mark the current state as visited.
         visited.append(currentState)
-
-        # Get all successors of the current state.
         for state, action, cost in problem.getSuccessors(currentState):
-            # If the successor state has not been visited, enqueue it with the updated path.
-            if state not in visited:
-                queue.push((state, steps + [action]))
-                print("Enqueued:", state, "with path:", steps + [action])  # Debug: Show enqueued state and path.
+             queue.push((state, steps + [ action ]))
 
-    # If the loop finishes without finding a goal, return an empty list (no solution).
-    print("No path to goal found.")  # Debug: No solution.
     return []
     
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
-    
+     
 def nullHeuristic(state, problem=None):
     """
     A heuristic function estimates the cost from the current state to the nearest
