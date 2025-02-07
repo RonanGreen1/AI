@@ -1,3 +1,12 @@
 {
+  "includePath": [
+    "${workspaceFolder}/**",
+    "C:/Users/ronan/SFML-3.0.0/include"
+  ],
+  "defines": [],
+  "compilerPath": "C:/path/to/your/compiler/bin/g\u002B\u002B.exe",
+  "cStandard": "c11",
+  "cppStandard": "c\u002B\u002B17",
+  "intelliSenseMode": "windows-gcc-x64",
   "CurrentProjectSetting": "No Configurations"
 }

@@ -1,0 +1,21 @@
+{
+  "configurations": [
+      {
+          "name": "Win32",
+          "includePath": [
+              "${workspaceFolder}",
+              "C:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\SFML\\include"
+          ],
+          "defines": [
+              "_DEBUG",
+              "UNICODE",
+              "_UNICODE"
+          ],
+          "compilerPath": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.42.34433\\bin\\Hostx86\\x86\\cl.exe",
+          "cStandard": "c11",
+          "cppStandard": "c++20",
+          "intelliSenseMode": "windows-msvc-x86"
+      }
+  ],
+  "version": 4
+}

@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build SFML Project",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/nologo",
+                "/std:c++20",
+                "/IC:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\SFML\\include",
+                "/FeC:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\Main.exe",
+                "C:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\Main.cpp",
+                "C:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\Game.cpp",
+                "C:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\Grid.cpp",
+                "C:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\Node.cpp",
+                "C:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\HealthPill.cpp",
+                "C:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\Droid.cpp",
+                "/link",
+                "/LIBPATH:C:\\Users\\ronan\\Fourth_Year\\AI\\Lab5\\ABS\\abs\\SFML\\lib",
+                "sfml-graphics.lib",
+                "sfml-window.lib",
+                "sfml-system.lib"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

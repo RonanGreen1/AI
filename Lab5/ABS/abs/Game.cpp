@@ -12,6 +12,8 @@
 #include "GetHealth.h"
 #include "IsHealthLow.h"
 #include "Hide.h"
+#include "protect.h"
+#include "FollowBehind.h"
 #include <iostream>
 #include <list>
 
@@ -19,7 +21,7 @@ using namespace std;
 
 Game::Game() :
 	//m_window{ sf::VideoMode{ 1400, 1100, 32 }, "Droid Behaviour" },
-	m_window{ sf::VideoMode{ 1000, 800, 32 }, "Droid Behaviour Tree Example" },
+	m_window(sf::VideoMode(1000, 800, 32), "Droid Behaviour Tree Example"),
 	m_exitGame{ false } //when true game will exit
 {
 
@@ -60,11 +62,11 @@ void Game::processEvents()
 	sf::Event t_event;
 	while (m_window.pollEvent(t_event))
 	{
-		if (sf::Event::Closed == t_event.type) // window message
+		if (t_event.type == sf::Event::KeyPressed && t_event.key.code == sf::Keyboard::Escape)
 		{
-			m_exitGame = true;
+   			m_exitGame = true;
 		}
-		if (sf::Event::KeyPressed == t_event.type) //user pressed a key
+		if (t_event.key.code == sf::Keyboard::T) //user pressed a key
 		{
 			processKeys(t_event);
 		}
@@ -167,6 +169,9 @@ void Game::updateDroids()
 			d->getBehaviour()->reset(" from the main Game loop.");
 		if (d->name == "D7" && (d->getBehaviour()->isSuccess() || d->getBehaviour()->isFailure()))	
 			d->getBehaviour()->reset(" from the main Game loop.");
+		if (d->name == "D8" && d->getBehaviour()->isSuccess()) {
+			d->getBehaviour()->reset(" from the main Game loop.");
+		}
 		if (d->name == "D1")	// Move to where the mouse has been clicked
 		{
 			if (goalSet)
@@ -182,6 +187,7 @@ void Game::updateDroids()
 	}
 
 }
+
 
 void Game::render()
 {
@@ -210,12 +216,12 @@ void Game::setupDroids()
 
 	// Example Droid with a simple MoveTo Behaviour
 	// Droid d1 will also follow the mouse clicks within the update loop
-	Droid *d1 = new Droid("D1", 5, 5, 1000, 0, 3, gridWorld);
-	Routine* moveTo1 = new MoveTo(5, 10, gridWorld);
-	d1->setBehaviour(moveTo1);
-	d1->target = gridWorld.getGridLocation(7, 9);
-	d1->setBrain(emptyBrain);
-	d1->setColour(sf::Color::Yellow);
+	//Droid *d1 = new Droid("D1", 5, 5, 1000, 0, 3, gridWorld);
+	//Routine* moveTo1 = new MoveTo(5, 10, gridWorld);
+	//d1->setBehaviour(moveTo1);
+	//d1->target = gridWorld.getGridLocation(7, 9);
+	//d1->setBrain(emptyBrain);
+	//d1->setColour(sf::Color::Yellow);
 	
 	//// Another example Droid with a simple MoveTo Behaviour starting at a random position
 	//srand(time(0));
@@ -248,11 +254,11 @@ void Game::setupDroids()
 	//d5->setColour(sf::Color::Blue);
 
 	//// Example Droid with a hide Behaviour using 2 random Droids
-	//Droid* d6 = new Droid("D6", 7, 3, 1000, 0, 3, gridWorld);
-	//Routine* hide6 = new Hide(-1, -1, gridWorld); // Pick two random droids for the Hide behaviour
-	//d6->setBehaviour(hide6);
-	//d6->setBrain(emptyBrain);
-	//d6->setColour(sf::Color::Red);
+	Droid* d6 = new Droid("D6", 7, 3, 1000, 0, 3, gridWorld);
+	Routine* hide6 = new Hide(-1, -1, gridWorld); // Pick two random droids for the Hide behaviour
+	d6->setBehaviour(hide6);
+	d6->setBrain(emptyBrain);
+	d6->setColour(sf::Color::Red);
 
 	//// Example Droid with a more complex Behaviour
 	//// Check for enemies nearby, if found then MoveAway otherwise continue to Goal
@@ -271,13 +277,21 @@ void Game::setupDroids()
 	//d7->setBrain(new CheckForAlarms()); //The Brain routine gets executed first.
 	//d7->setColour(sf::Color(39,215,205));
 
-	m_droids.push_back(d1);
+	// Create a Droid that follows D1 (Yellow)
+	//Droid* d8 = new Droid("D8", (rand() % (int)gridWorld.gridSize) + 1, (rand() % (int)gridWorld.gridSize) + 1, 1000, 0, 3, gridWorld);
+	//Routine* followRoutine = new FollowBehind(1, gridWorld); // Follows Droid 1 (Yellow)
+	//d8->setBehaviour(followRoutine);
+	//d8->setBrain(emptyBrain);
+	//d8->setColour(sf::Color::Red);
+
+	//m_droids.push_back(d1);
 	//m_droids.push_back(d2);
 	//m_droids.push_back(d3);
 	//m_droids.push_back(d4);
 	//m_droids.push_back(d5);
-    //m_droids.push_back(d6);
+    m_droids.push_back(d6);
 	//m_droids.push_back(d7);
+	//m_droids.push_back(d8);
 	gridWorld.m_gridDroids = m_droids;	//So we can access them when inside the behaviours.
 
 	int x = gridWorld.getGridCellX(sf::Vector2i(400, 300));

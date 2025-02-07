@@ -5,7 +5,6 @@
 #include "Droid.h"
 #include "HealthPill.h"
 #include <SFML/Graphics.hpp>
-
 //using namespace std;
 
 class Game
