@@ -13,7 +13,7 @@
 #include "IsHealthLow.h"
 #include "Hide.h"
 #include "protect.h"
-#include "FollowBehind.h"
+#include "SpiralDroid.h"
 #include <iostream>
 #include <list>
 
@@ -254,11 +254,11 @@ void Game::setupDroids()
 	//d5->setColour(sf::Color::Blue);
 
 	//// Example Droid with a hide Behaviour using 2 random Droids
-	Droid* d6 = new Droid("D6", 7, 3, 1000, 0, 3, gridWorld);
-	Routine* hide6 = new Hide(-1, -1, gridWorld); // Pick two random droids for the Hide behaviour
-	d6->setBehaviour(hide6);
-	d6->setBrain(emptyBrain);
-	d6->setColour(sf::Color::Red);
+	//Droid* d6 = new Droid("D6", 7, 3, 1000, 0, 3, gridWorld);
+	//Routine* hide6 = new Hide(-1, -1, gridWorld); // Pick two random droids for the Hide behaviour
+	//d6->setBehaviour(hide6);
+	//d6->setBrain(emptyBrain);
+	//d6->setColour(sf::Color::Red);
 
 	//// Example Droid with a more complex Behaviour
 	//// Check for enemies nearby, if found then MoveAway otherwise continue to Goal
@@ -277,21 +277,21 @@ void Game::setupDroids()
 	//d7->setBrain(new CheckForAlarms()); //The Brain routine gets executed first.
 	//d7->setColour(sf::Color(39,215,205));
 
-	// Create a Droid that follows D1 (Yellow)
-	//Droid* d8 = new Droid("D8", (rand() % (int)gridWorld.gridSize) + 1, (rand() % (int)gridWorld.gridSize) + 1, 1000, 0, 3, gridWorld);
-	//Routine* followRoutine = new FollowBehind(1, gridWorld); // Follows Droid 1 (Yellow)
-	//d8->setBehaviour(followRoutine);
-	//d8->setBrain(emptyBrain);
-	//d8->setColour(sf::Color::Red);
+	// Create a Droid that spirals inwards
+	Droid* d8 = new Droid("D8", (rand() % (int)gridWorld.gridSize) + 1, (rand() % (int)gridWorld.gridSize) + 1, 1000, 0, 3, gridWorld);
+	Routine* followRoutine = new SpiralDroid(gridWorld);
+	d8->setBehaviour(followRoutine);
+	d8->setBrain(emptyBrain);
+	d8->setColour(sf::Color::Red);
 
 	//m_droids.push_back(d1);
 	//m_droids.push_back(d2);
 	//m_droids.push_back(d3);
 	//m_droids.push_back(d4);
 	//m_droids.push_back(d5);
-    m_droids.push_back(d6);
+    //m_droids.push_back(d6);
 	//m_droids.push_back(d7);
-	//m_droids.push_back(d8);
+	m_droids.push_back(d8);
 	gridWorld.m_gridDroids = m_droids;	//So we can access them when inside the behaviours.
 
 	int x = gridWorld.getGridCellX(sf::Vector2i(400, 300));
